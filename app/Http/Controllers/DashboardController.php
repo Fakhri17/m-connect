@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\FormPengajuan;
+use App\Models\FormPengajuan as ModelFormPengajuan;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -16,7 +16,7 @@ class DashboardController extends Controller
     {
         return view('dashboard', [
             'title' => 'Dashboard',
-            'data' => FormPengajuan::all()
+            'data' => ModelFormPengajuan::all()
         ]);
     }
 
@@ -49,7 +49,10 @@ class DashboardController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('detail-pengajuan', [
+            'title' => 'Detail Pengajuan',
+            'data' => ModelFormPengajuan::find($id)
+        ]);
     }
 
     /**
@@ -84,5 +87,20 @@ class DashboardController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    /**
+     * Update status value.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function statusUpdate($type, $id)
+    {
+        $data = ModelFormPengajuan::find($id);
+        $data->status = $type;
+        $data->save();
+        return redirect('dashboard');
     }
 }

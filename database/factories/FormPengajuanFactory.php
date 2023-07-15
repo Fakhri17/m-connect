@@ -27,7 +27,8 @@ class FormPengajuanFactory extends Factory
             'email' => $faker->email(),
             'no_telp' => $faker->phoneNumber(),
             'pengajuan' => 'Konsultasi SOP',
-            'deskripsi' => $faker->text()
+            'deskripsi' => $faker->text(),
+            'status' => 'backlog',
         ];
     }
 }
