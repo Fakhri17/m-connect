@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\FormPengajuan as ModelFormPengajuan;
+use App\Models\JadwalMeeting;
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class JadwalMeetingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard.index', [
-            'title' => 'Dashboard',
-            'data' => ModelFormPengajuan::all()
+        return view('dashboard.jadwal_meeting', [
+            'title' => 'Jadwal Meeting',
+            'data_jadwal' => JadwalMeeting::orderBy('id', 'desc')->get()
         ]);
     }
 
@@ -38,7 +38,12 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        JadwalMeeting::create([
+            'nama_pt' => $request->nama_pt,
+            'waktu' => $request->waktu,
+        ]);
+
+        return redirect()->route('jadwal.meeting');
     }
 
     /**
@@ -49,10 +54,7 @@ class DashboardController extends Controller
      */
     public function show($id)
     {
-        return view('dashboard/detail-pengajuan', [
-            'title' => 'Detail Pengajuan',
-            'data' => ModelFormPengajuan::find($id)
-        ]);
+        //
     }
 
     /**
@@ -84,24 +86,9 @@ class DashboardController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy()
+    public function destroy($id)
     {
-        ModelFormPengajuan::where('status', 'rejected')->delete();
-        return redirect()->route('dashboard');
-    }
-
-
-    /**
-     * Update status value.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function statusUpdate($type, $id)
-    {
-        $data = ModelFormPengajuan::find($id);
-        $data->status = $type;
-        $data->save();
-        return redirect('dashboard');
+        JadwalMeeting::destroy($id);
+        return redirect()->route('jadwal.meeting');
     }
 }
