@@ -6,6 +6,7 @@
   <title>M-Connect</title>
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <script src="{{ asset('js/app.js')}}"></script>
+  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
 </head>
 <body class="">
   <header class="sticky top-0 inset-x-0 flex flex-wrap sm:justify-start sm:flex-nowrap z-[48] w-full bg-color-blue-3 border-b text-sm py-2.5 sm:py-4 lg:pl-64">
