@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +20,22 @@ Route::get('/', function () {
 
 Route::get('/about', function () {
     return view('about');
+});
+
+Route::get('/form-pengajuan', function () {
+    return view('form-pengajuan');
+});
+
+Route::middleware('guest')->group(function () {
+    // Route Login
+    Route::prefix('login')->middleware('guest')->group(function () {
+        Route::get('/', [LoginController::class, 'index'])->name('login');
+        Route::post('/', [LoginController::class, 'login']);
+    });
+});
+Route::post('/logout', [LoginController::class, 'logout']);
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/{dataPengajuan}', [DashboardController::class, 'show'])->name('dashboard.show');
+    Route::get('/jadwal-meeting', [MeetingController::class, 'index'])->name('meeting');
 });
