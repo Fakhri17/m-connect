@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FormPengajuan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 
@@ -25,6 +26,13 @@ Route::get('/about', function () {
 Route::get('/form-pengajuan', function () {
     return view('form-pengajuan');
 });
+Route::get('/form-pengajuan-success', function () {
+    return view('form-pengajuan-success');
+});
+
+
+Route::post('/form-pengajuan/store', [FormPengajuan::class, 'store'])->name('form.pengajuan.store');
+
 
 Route::middleware('guest')->group(function () {
     // Route Login
