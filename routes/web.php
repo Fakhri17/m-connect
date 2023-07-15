@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FormPengajuan;
+use App\Http\Controllers\JadwalMeetingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 
@@ -48,10 +49,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/dashboard/{id}', [DashboardController::class, 'show'])->name('dashboard.show');
     Route::get('/dashboard/{type}/{id}', [DashboardController::class, 'statusUpdate'])->name('dashboard.statusUpdate');
-
-    // Route::get('/dashboard/{dataPengajuan}', [DashboardController::class, 'show'])->name('dashboard.show');
-    Route::get('/jadwal-meeting', [MeetingController::class, 'index'])->name('meeting');
-
+    // Route Jadwal Meeting
+    Route::get('/dashboard/jadwal-meeting', [JadwalMeetingController::class, 'index'])->name('jadwal.meeting');
     // Route Logout
     Route::post('/logout', [LoginController::class, 'logout']);
+
+
+
+    // Route::get('/dashboard/{dataPengajuan}', [DashboardController::class, 'show'])->name('dashboard.show');
+    // Route::get('/jadwal-meeting', [MeetingController::class, 'index'])->name('meeting');
+
+
 });
