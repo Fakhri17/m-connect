@@ -41,6 +41,11 @@
 					</a>
 				</div>	
 			@endif
+			{{-- back to /dashboard --}}
+			<div class="mt-5">
+				<a class="text-color-blue-4 hover:underline text-base" href="{{ route('dashboard') }}">Kembali</a>
+			</div>
+			
 		</div>
 	</div>
 </div>
