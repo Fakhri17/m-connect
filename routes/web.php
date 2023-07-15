@@ -45,12 +45,17 @@ Route::middleware('guest')->group(function () {
 
 
 Route::middleware(['auth'])->group(function () {
-    // Route Dashboard
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/dashboard/{id}', [DashboardController::class, 'show'])->name('dashboard.show');
-    Route::get('/dashboard/{type}/{id}', [DashboardController::class, 'statusUpdate'])->name('dashboard.statusUpdate');
     // Route Jadwal Meeting
     Route::get('/dashboard/jadwal-meeting', [JadwalMeetingController::class, 'index'])->name('jadwal.meeting');
+    Route::post('/dashboard/jadwal-meeting/store', [JadwalMeetingController::class, 'store'])->name('jadwal.meeting.store');
+    Route::post('/dashboard/jadwal-meeting/destroy', [JadwalMeetingController::class, 'destroy'])->name('jadwal.meeting.destroy');
+
+    // Route Dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/destroy', [DashboardController::class, 'destroy'])->name('dashboard.destroy');
+    Route::get('/dashboard/{id}', [DashboardController::class, 'show'])->name('dashboard.show');
+    Route::get('/dashboard/{type}/{id}', [DashboardController::class, 'statusUpdate'])->name('dashboard.statusUpdate');
+
     // Route Logout
     Route::post('/logout', [LoginController::class, 'logout']);
 

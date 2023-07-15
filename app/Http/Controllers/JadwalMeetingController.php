@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JadwalMeeting;
 use Illuminate\Http\Request;
 
 class JadwalMeetingController extends Controller
@@ -13,7 +14,10 @@ class JadwalMeetingController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.jadwal_meeting', [
+            'title' => 'Jadwal Meeting',
+            'data_jadwal' => JadwalMeeting::orderBy('id', 'desc')->get()
+        ]);
     }
 
     /**
@@ -34,7 +38,12 @@ class JadwalMeetingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        JadwalMeeting::create([
+            'nama_pt' => $request->nama_pt,
+            'waktu' => $request->waktu,
+        ]);
+
+        return redirect()->route('jadwal.meeting');
     }
 
     /**
@@ -79,6 +88,7 @@ class JadwalMeetingController extends Controller
      */
     public function destroy($id)
     {
-        //
+        JadwalMeeting::destroy($id);
+        return redirect()->route('jadwal.meeting');
     }
 }
