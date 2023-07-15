@@ -14,7 +14,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard', [
+        return view('dashboard.index', [
             'title' => 'Dashboard',
             'data' => ModelFormPengajuan::all()
         ]);
@@ -49,7 +49,7 @@ class DashboardController extends Controller
      */
     public function show($id)
     {
-        return view('detail-pengajuan', [
+        return view('dashboard/detail-pengajuan', [
             'title' => 'Detail Pengajuan',
             'data' => ModelFormPengajuan::find($id)
         ]);
