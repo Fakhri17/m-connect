@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\FormPengajuan as ModelsFormPengajuan;
+use App\Models\FormPengajuan as ModelFormPengajuan;
+
 use Illuminate\Http\Request;
 
 class FormPengajuan extends Controller
 {
 
+    // Method index -> Menampilkan form pengajuan
+    public function index()
+    {
+        return view('form-pengajuan', [
+            'title' => 'Form Pengajuan',
+        ]);
+    }
 
     // Method store -> Menambah data pengajuan
     public function store(Request $request)
@@ -22,7 +30,17 @@ class FormPengajuan extends Controller
             'deskripsi' => $request->deskripsi,
         ];
 
-        ModelsFormPengajuan::create($data);
+        ModelFormPengajuan::create($data);
         return redirect('form-pengajuan-success');
+    }
+
+
+
+    // Method success -> Menampilkan halaman form pengajuan success
+    public function success()
+    {
+        return view('form-pengajuan-success', [
+            'title' => 'Form Pengajuan Success',
+        ]);
     }
 }

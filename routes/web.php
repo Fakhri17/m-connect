@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FormPengajuan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
@@ -15,35 +16,42 @@ use App\Http\Controllers\LoginController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
-
-Route::get('/about', function () {
-    return view('about');
-});
-
-Route::get('/form-pengajuan', function () {
-    return view('form-pengajuan');
-});
-Route::get('/form-pengajuan-success', function () {
-    return view('form-pengajuan-success');
-});
-
-
-Route::post('/form-pengajuan/store', [FormPengajuan::class, 'store'])->name('form.pengajuan.store');
 
 
 Route::middleware('guest')->group(function () {
+    Route::get('/', function () {
+        return view('index');
+    });
+
+    Route::get('/about', function () {
+        return view('about');
+    });
+
+    // Route Pengajuan Form
+    Route::get('/form-pengajuan', [FormPengajuan::class, 'index']);
+    Route::get('/form-pengajuan-success', [FormPengajuan::class, 'success']);
+    Route::post('/form-pengajuan/store', [FormPengajuan::class, 'store'])->name('form.pengajuan.store');
+
+
     // Route Login
     Route::prefix('login')->middleware('guest')->group(function () {
         Route::get('/', [LoginController::class, 'index'])->name('login');
         Route::post('/', [LoginController::class, 'login']);
     });
 });
-Route::post('/logout', [LoginController::class, 'logout']);
+
+
+
+
 Route::middleware(['auth'])->group(function () {
+    // Route Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/dashboard/{dataPengajuan}', [DashboardController::class, 'show'])->name('dashboard.show');
+    Route::get('/dashboard/{id}', [DashboardController::class, 'show'])->name('dashboard.show');
+    Route::get('/dashboard/{type}/{id}', [DashboardController::class, 'statusUpdate'])->name('dashboard.statusUpdate');
+
+    // Route::get('/dashboard/{dataPengajuan}', [DashboardController::class, 'show'])->name('dashboard.show');
     Route::get('/jadwal-meeting', [MeetingController::class, 'index'])->name('meeting');
+
+    // Route Logout
+    Route::post('/logout', [LoginController::class, 'logout']);
 });
