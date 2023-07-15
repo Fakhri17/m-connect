@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\FormPengajuan as ModelsFormPengajuan;
+use App\Models\FormPengajuan as ModelFormPengajuan;
+
 use Illuminate\Http\Request;
 
 class FormPengajuan extends Controller
@@ -22,7 +23,7 @@ class FormPengajuan extends Controller
             'deskripsi' => $request->deskripsi,
         ];
 
-        ModelsFormPengajuan::create($data);
+        ModelFormPengajuan::create($data);
         return redirect('form-pengajuan-success');
     }
 }

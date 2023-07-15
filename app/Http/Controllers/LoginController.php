@@ -11,8 +11,13 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    public function login(){
-        $credentials = request()->only('email', 'password');
+    public function login(Request $request)
+    {
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password,
+        ];
+        // $credentials = request()->only('email', 'password');
         if (auth()->attempt($credentials)) {
             request()->session()->regenerate();
             return redirect()->intended('/dashboard');

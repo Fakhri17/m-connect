@@ -5,35 +5,36 @@
         <div class="w-full">
             <h1 class="mb-5 text-4xl font-bold text-center text-color-blue-3">Form Pengajuan</h1>
             <form class="grid grid-cols-1 gap-4 px-5 md:px-20" action="{{ route('form.pengajuan.store') }}" method="post">
+                @csrf
                 <div class="">
                     <label for="input-label" class="block mb-2 text-sm font-medium">Nama</label>
                     <input type="text" id="input-label"
                         class="block w-full px-4 py-3 text-sm border-2 rounded-md border-color-blue-1"
-                        placeholder="masukkan nama" name="nama">
+                        placeholder="masukkan nama" name="nama" required>
                 </div>
                 <div class="">
                     <label for="input-label" class="block mb-2 text-sm font-medium">Nama PT</label>
                     <input type="text" id="input-label"
                         class="block w-full px-4 py-3 text-sm border-2 rounded-md border-color-blue-1"
-                        placeholder="masukkan nama PT" name="nama_pt">
+                        placeholder="masukkan nama PT" name="nama_pt" required>
                 </div>
                 <div class="">
                     <label for="input-label" class="block mb-2 text-sm font-medium">Alamat PT</label>
                     <input type="text" id="input-label"
                         class="block w-full px-4 py-3 text-sm border-2 rounded-md border-color-blue-1"
-                        placeholder="masukkan alamat PT" name="alamat_pt">
+                        placeholder="masukkan alamat PT" name="alamat_pt" required>
                 </div>
                 <div class="">
                     <label for="input-label" class="block mb-2 text-sm font-medium">Email</label>
                     <input type="email" id="input-label"
                         class="block w-full px-4 py-3 text-sm border-2 rounded-md border-color-blue-1"
-                        placeholder="masukkan email" name="email">
+                        placeholder="masukkan email" name="email" required>
                 </div>
                 <div class="">
                     <label for="input-label" class="block mb-2 text-sm font-medium">No Telp/WA</label>
                     <input type="text" id="input-label"
                         class="block w-full px-4 py-3 text-sm border-2 rounded-md border-color-blue-1"
-                        placeholder="+6289xxxxx" name="no_telp">
+                        placeholder="+6289xxxxx" name="no_telp" required>
                 </div>
                 <div>
                     <label for="input-label" class="block mb-2 text-sm font-medium">Form Pengajuan</label>
@@ -46,7 +47,7 @@
                 <div>
                     <label for="input-label" class="block mb-2 text-sm font-medium">Deskripsi</label>
                     <textarea class="block w-full px-4 py-3 text-sm rounded-md border-color-blue-1" rows="3"
-                        placeholder="Isi Deskripsi" class="deskripsi" name="deskripsi"></textarea>
+                        placeholder="Isi Deskripsi" class="deskripsi" name="deskripsi" required></textarea>
                 </div>
                 <button type="submit"
                     class="px-6 py-3 text-sm text-white capitalize rounded-md bg-color-blue-4 hover:bg-blue-500">
