@@ -1,11 +1,13 @@
-{{-- Data Dari Form Pengajuan --}}
+@extends('layouts.dashboard')
 
-<form action="/logout" method="POST">
+@section('content')
+  {{-- Data Dari Form Pengajuan --}}
+  <form action="/logout" method="POST">
     @csrf
     <button type="submit">Logout</button>
-</form>
+  </form>
 
-@foreach ($data as $item)
+  @foreach ($data as $item)
     <ul>
         <li>{{ $item->nama }}</li>
         <li>{{ $item->nama_pt }}</li>
@@ -18,4 +20,7 @@
             <a href="/dashboard/{{ $item->id }}">Detail</a>
         </li>
     </ul><br>
-@endforeach
+  @endforeach
+@endsection
+
+
