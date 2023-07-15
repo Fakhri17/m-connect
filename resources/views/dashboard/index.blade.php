@@ -39,16 +39,23 @@
 						</thead>
 						<tbody class="divide-y divide-gray-500 ">
 							@foreach ($data as $item)
-							@php
-								$status = $item->status;
-								$tableColor = '';
-								if ($status == 'confirmed') {
-									$tableColor = 'bg-[#3FD2C7]/[.3]';
-								} 
-								else if ($status == 'rejected') {
-									$tableColor = 'bg-[#F60000]/[.3]';
-								}
-							@endphp
+								@php
+									$status = $item->status;
+									$tableColor = '';
+									if ($status == 'confirmed') {
+										$tableColor = 'bg-[#3FD2C7]/[.3]';
+									} 
+									else if ($status == 'rejected') {
+										$tableColor = 'bg-[#F60000]/[.3]';
+									}
+									
+									$waMessage = "Halo, saya ingin menghubungi anda terkait pengajuan " . $item->pengajuan . " dari PT " . $item->nama_pt . ". Terima kasih.";
+									$message = urlencode($waMessage);
+									// format no based on country like 6281234567890
+									$formattedNomer = preg_replace('/^0/', '62', $item->no_telp);
+									$waApi = "https://api.whatsapp.com/send?phone=" . $formattedNomer . "&text=" . $message;
+									
+								@endphp
 							<tr class="{{ $tableColor }}">
 								<td class="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
 									{{ $item->nama }}</td>
@@ -57,7 +64,7 @@
 								<td class="flex flex-wrap items-center px-6 py-4 text-sm font-medium whitespace-nowrap">
 									<a class="px-4 py-1 mr-2 text-xs text-white rounded-md bg-color-blue-4 hover:bg-sky-700"
 										href="/dashboard/{{ $item->id }}">Detail</a>
-									<a class="px-4 py-1 text-xs text-white rounded-md bg-color-blue-4 hover:bg-sky-700" href="#">Hubungi</a>
+									<a class="px-4 py-1 text-xs text-white rounded-md bg-color-blue-4 hover:bg-sky-700" href="{{ $waApi }}">Hubungi</a>
 								</td>
 							</tr>
 							@endforeach

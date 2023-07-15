@@ -14,9 +14,11 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        // order by created_at desc
+        $data = ModelFormPengajuan::orderBy('created_at', 'desc')->get();
         return view('dashboard.index', [
             'title' => 'Dashboard',
-            'data' => ModelFormPengajuan::all()
+            'data' => $data,
         ]);
     }
 
