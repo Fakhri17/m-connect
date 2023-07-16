@@ -48,7 +48,7 @@ Route::middleware(['auth'])->group(function () {
     // Route Jadwal Meeting
     Route::get('/dashboard/jadwal-meeting', [JadwalMeetingController::class, 'index'])->name('jadwal.meeting');
     Route::post('/dashboard/jadwal-meeting/store', [JadwalMeetingController::class, 'store'])->name('jadwal.meeting.store');
-    Route::post('/dashboard/jadwal-meeting/destroy', [JadwalMeetingController::class, 'destroy'])->name('jadwal.meeting.destroy');
+    Route::post('/dashboard/jadwal-meeting/destroy/{id}', [JadwalMeetingController::class, 'destroy']);
 
     // Route Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

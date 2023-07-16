@@ -88,7 +88,7 @@ class JadwalMeetingController extends Controller
      */
     public function destroy($id)
     {
-        JadwalMeeting::destroy($id);
+        JadwalMeeting::where('id', $id)->delete();
         return redirect()->route('jadwal.meeting');
     }
 }
