@@ -72,7 +72,12 @@
 								<td class="flex flex-wrap items-center px-6 py-4 text-sm font-medium whitespace-nowrap">
 									<a class="px-4 py-1 mr-2 text-xs text-white rounded-md bg-color-blue-4 hover:bg-sky-700"
 										href="/dashboard/{{ $item->id }}">Detail</a>
-									<a class="px-4 py-1 text-xs text-white rounded-md bg-color-blue-4 hover:bg-sky-700" href="{{ $waApi }}">Hubungi</a>
+									<a class="px-4 py-1 text-xs text-white rounded-md bg-color-blue-4 hover:bg-sky-700" href="{{ $waApi }}">
+										<div class="flex flex-wrap items-center">
+											<iconify-icon icon="ic:baseline-whatsapp" class="text-base"></iconify-icon>
+											<span class="ml-1">Hubungi</span>
+										</div>
+									</a>
 								</td>
 							</tr>
 							@endforeach
